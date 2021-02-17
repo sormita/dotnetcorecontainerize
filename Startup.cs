@@ -63,38 +63,38 @@ namespace InventoryManagement
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Products}/{action=Index}/{id?}");
-            });
-
-
-            //app.Run(async (context) =>
+            //app.UseEndpoints(endpoints =>
             //{
-            //    IConfigurationRoot configuration = new ConfigurationBuilder()
-            //     .SetBasePath(Directory.GetCurrentDirectory())
-            //     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            //     .AddEnvironmentVariables()
-            //     .Build();
-
-            //    string connectionStringHost = configuration["EXTERNAL_AzureSqlServer_SERVICE_SERVICE_HOST"];
-            //    string connectionStringPort = configuration["EXTERNAL_AzureSqlServer_SERVICE_SERVICE_PORT"];
-            //    string connectionUser_ID= configuration["User_ID"];
-            //    string connectionPassword = configuration["Password"];
-
-            //    //var message = $"Host: {Environment.MachineName}\n" +
-            //    //    $"EnvironmentName: {env.EnvironmentName}\n" +
-            //    //    $"Secret value: {Configuration.GetConnectionString("InventoryDatabase")}";
-            //    var message = $"Host: {Environment.MachineName}\n" +
-            //        $"EnvironmentName: {env.EnvironmentName}\n" +
-            //        $"connectionStringPort: {connectionStringPort}\n" +
-            //        $"connectionUser_ID: {connectionUser_ID}\n" +
-            //        $"connectionPassword: {connectionPassword}\n" +
-            //        $"ConnectionStringHost: {connectionStringHost}";
-            //    await context.Response.WriteAsync(message);
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Products}/{action=Index}/{id?}");
             //});
+
+
+            app.Run(async (context) =>
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                 .AddEnvironmentVariables()
+                 .Build();
+
+                string connectionStringHost = configuration["EXTERNAL_AzureSqlServer_SERVICE_SERVICE_HOST"];
+                string connectionStringPort = configuration["EXTERNAL_AzureSqlServer_SERVICE_SERVICE_PORT"];
+                string connectionUser_ID = configuration["User_ID"];
+                string connectionPassword = configuration["Password"];
+
+                //var message = $"Host: {Environment.MachineName}\n" +
+                //    $"EnvironmentName: {env.EnvironmentName}\n" +
+                //    $"Secret value: {Configuration.GetConnectionString("InventoryDatabase")}";
+                var message = $"Host: {Environment.MachineName}\n" +
+                    $"EnvironmentName: {env.EnvironmentName}\n" +
+                    $"connectionStringPort: {connectionStringPort}\n" +
+                    $"connectionUser_ID: {connectionUser_ID}\n" +
+                    $"connectionPassword: {connectionPassword}\n" +
+                    $"ConnectionStringHost: {connectionStringHost}";
+                await context.Response.WriteAsync(message);
+            });
         }
     }
 }
